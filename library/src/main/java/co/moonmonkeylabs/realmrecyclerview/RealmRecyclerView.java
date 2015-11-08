@@ -16,24 +16,26 @@ import android.widget.FrameLayout;
  */
 public class RealmRecyclerView extends FrameLayout {
 
-    public interface OnRefreshListener {
-        void onRefresh();
-    }
-
-  /*  private SwipeRefreshLayout swipeRefreshLayout;*/
+    /*  private SwipeRefreshLayout swipeRefreshLayout;*/
     private RecyclerView recyclerView;
-
     private ViewStub emptyContentContainer;
-
     // Attributes
     private boolean isRefreshable;
     private int emptyViewId;
-
     // State
     private boolean isRefreshing;
-
     // Listener
     private OnRefreshListener onRefreshListener;
+    private SwipeRefreshLayout.OnRefreshListener recyclerViewRefreshListener =
+            new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    if (!isRefreshing && onRefreshListener != null) {
+                        onRefreshListener.onRefresh();
+                    }
+                    isRefreshing = true;
+                }
+            };
 
     public RealmRecyclerView(Context context) {
         super(context);
@@ -145,7 +147,7 @@ public class RealmRecyclerView extends FrameLayout {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    public RecyclerView getRecyclerView(){
+    public RecyclerView getRecyclerView() {
         return recyclerView;
     }
     //
@@ -164,14 +166,7 @@ public class RealmRecyclerView extends FrameLayout {
         swipeRefreshLayout.setRefreshing(refreshing);*/
     }
 
-    private SwipeRefreshLayout.OnRefreshListener recyclerViewRefreshListener =
-            new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    if (!isRefreshing && onRefreshListener != null) {
-                        onRefreshListener.onRefresh();
-                    }
-                    isRefreshing = true;
-                }
-            };
+    public interface OnRefreshListener {
+        void onRefresh();
+    }
 }

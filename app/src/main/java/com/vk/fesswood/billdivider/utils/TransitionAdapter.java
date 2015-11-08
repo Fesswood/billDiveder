@@ -2,8 +2,6 @@ package com.vk.fesswood.billdivider.utils;
 
 import android.transition.Transition;
 
-import com.vk.fesswood.billdivider.R;
-
 public class TransitionAdapter implements Transition.TransitionListener {
 
     @Override

@@ -45,10 +45,10 @@ public abstract class RealmBasedRecyclerViewAdapter<T extends RealmObject,
     private ColumnType animateIdType;
 
     public RealmBasedRecyclerViewAdapter(
-        Context context,
-        RealmResults<T> realmResults,
-        boolean automaticUpdate,
-        boolean animateResults) {
+            Context context,
+            RealmResults<T> realmResults,
+            boolean automaticUpdate,
+            boolean animateResults) {
         if (context == null) {
             throw new IllegalArgumentException("Context cannot be null");
         }
@@ -138,7 +138,7 @@ public abstract class RealmBasedRecyclerViewAdapter<T extends RealmObject,
                     } else if (deltas.size() > 5) {
                         notifyDataSetChanged();
                     } else {
-                        for (Delta delta: deltas) {
+                        for (Delta delta : deltas) {
                             if (delta.getType() == Delta.TYPE.INSERT) {
                                 notifyItemInserted(delta.getRevised().getPosition());
                             } else if (delta.getType() == Delta.TYPE.DELETE) {

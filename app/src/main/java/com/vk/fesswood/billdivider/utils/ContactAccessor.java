@@ -6,8 +6,6 @@
  ******************************************************************************/
 package com.vk.fesswood.billdivider.utils;
 
-import java.io.InputStream;
-
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -21,6 +19,8 @@ import android.provider.ContactsContract.Contacts;
 import android.util.Log;
 
 import com.vk.fesswood.billdivider.data.model.Contact;
+
+import java.io.InputStream;
 
 
 /**

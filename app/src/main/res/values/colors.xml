@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +13,15 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <item type="color" name="primary">#8BC34A</item>
-    <item type="color" name="primary_dark">#689F38</item>
-    <item type="color" name="primary_light">#DCEDC8</item>
-    <item type="color" name="accent">#FF5722</item>
-    <item type="color" name="primary_text">#212121</item>
-    <item type="color" name="secondary_text">#727272</item>
-    <item type="color" name="icons">#212121</item>
-    <item type="color" name="divider">#B6B6B6</item>
+<resources>
+    <item name="primary" type="color">#8BC34A</item>
+    <item name="primary_dark" type="color">#689F38</item>
+    <item name="primary_light" type="color">#DCEDC8</item>
+    <item name="accent" type="color">#FF5722</item>
+    <item name="primary_text" type="color">#212121</item>
+    <item name="secondary_text" type="color">#727272</item>
+    <item name="icons" type="color">#212121</item>
+    <item name="divider" type="color">#B6B6B6</item>
 
     <integer-array name="androidcolors">
         <item>@color/primary</item>
@@ -65,17 +64,14 @@
     <color name="md_teal_500">#009688</color>
 
 
-
     <color name="md_green_300">#81C784</color>
     <color name="md_green_400">#66BB6A</color>
     <color name="md_green_500">#4CAF50</color>
 
 
-
     <color name="md_light_green_300">#AED581</color>
     <color name="md_light_green_400">#9CCC65</color>
     <color name="md_light_green_500">#8BC34A</color>
-
 
 
     <color name="md_lime_300">#DCE775</color>

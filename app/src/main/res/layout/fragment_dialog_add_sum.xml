@@ -2,64 +2,69 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/primary"
-            android:paddingTop="@dimen/item_margin"
             android:paddingBottom="@dimen/item_margin"
             android:paddingLeft="@dimen/item_horizontal_margin"
-            android:paddingRight="@dimen/item_horizontal_margin">
+            android:paddingRight="@dimen/item_horizontal_margin"
+            android:paddingTop="@dimen/item_margin">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
                 android:text="@string/add_summ"
-                android:textSize="30dp"
                 android:textColor="@color/primary_light"
-                android:layout_gravity="left|bottom" />
+                android:textSize="30dp" />
         </FrameLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="@dimen/item_margin"
             android:paddingBottom="@dimen/item_margin"
             android:paddingLeft="@dimen/item_horizontal_margin"
-            android:paddingRight="@dimen/item_horizontal_margin">
+            android:paddingRight="@dimen/item_horizontal_margin"
+            android:paddingTop="@dimen/item_margin">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusForward="@+id/etSum"
+                    android:hint="@string/etTitle"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:hint="@string/etTitle"/>
+                    android:nextFocusForward="@+id/etSum" />
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tilSum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/etSum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusDown="@+id/fabOK"
-                    android:inputType="number"
+                    android:hint="@string/etSum"
                     android:imeOptions="actionDone"
-                    android:hint="@string/etSum"/>
+                    android:inputType="number"
+                    android:nextFocusDown="@+id/fabOK" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.FloatingActionButton
@@ -67,8 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_marginTop="80dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="80dp"
                 android:src="@drawable/ic_done_white_24dp" />
         </LinearLayout>
     </LinearLayout>

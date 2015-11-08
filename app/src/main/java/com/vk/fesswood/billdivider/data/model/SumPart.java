@@ -1,6 +1,5 @@
 package com.vk.fesswood.billdivider.data.model;
 
-import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
@@ -16,6 +15,7 @@ public class SumPart extends RealmObject {
     private String title;
     private double value;
     private int color;
+
     public int getId() {
         return id;
     }

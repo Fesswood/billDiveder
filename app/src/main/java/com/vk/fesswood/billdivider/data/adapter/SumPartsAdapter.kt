@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-
 import com.vk.fesswood.billdivider.R
 import com.vk.fesswood.billdivider.data.model.SumPart
-
 import io.realm.Realm
-import io.realm.RealmBaseAdapter
 import io.realm.RealmBasedRecyclerViewAdapter
 import io.realm.RealmResults
 
@@ -38,9 +35,9 @@ public class SumPartsAdapter(context: Context, realmResults: RealmResults<SumPar
 
     public inner class ViewHolder(container: View) : RecyclerView.ViewHolder(container) {
 
-        public  val Title: TextView
-        public  val Sum: TextView
-        public  val flColor: FrameLayout
+        public val Title: TextView
+        public val Sum: TextView
+        public val flColor: FrameLayout
 
         init {
             Title = container.findViewById(R.id.textView1) as TextView
@@ -49,7 +46,7 @@ public class SumPartsAdapter(context: Context, realmResults: RealmResults<SumPar
         }
     }
 
-    public fun initSwipeToDelete(rv :RecyclerView) {
+    public fun initSwipeToDelete(rv: RecyclerView) {
         val mIth = ItemTouchHelper(
                 object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP, ItemTouchHelper.LEFT) {
                     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
@@ -58,7 +55,7 @@ public class SumPartsAdapter(context: Context, realmResults: RealmResults<SumPar
 
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         var realm = Realm.getDefaultInstance()
-                        var sumPart =realmResults[viewHolder.adapterPosition];
+                        var sumPart = realmResults[viewHolder.adapterPosition];
                         mSumPartDeleted = SumPart();
                         mSumPartDeleted.id = sumPart.id
                         mSumPartDeleted.color = sumPart.color
@@ -73,6 +70,7 @@ public class SumPartsAdapter(context: Context, realmResults: RealmResults<SumPar
                 })
         mIth.attachToRecyclerView(rv)
     }
+
     public fun getDeletedItems(): SumPart {
         return mSumPartDeleted;
     }

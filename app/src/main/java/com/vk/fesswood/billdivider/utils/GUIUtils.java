@@ -6,22 +6,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Outline;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.transition.Fade;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewPropertyAnimator;
 import android.view.Window;
-import android.view.animation.Animation;
 import android.view.animation.PathInterpolator;
 
 import com.vk.fesswood.billdivider.R;
@@ -44,10 +37,10 @@ public class GUIUtils {
         w.setEnterTransition(ex);
     }
 
-    public static void configureFab (View fabButton) {
+    public static void configureFab(View fabButton) {
 
         int fabSize = fabButton.getContext().getResources()
-            .getDimensionPixelSize(R.dimen.fab_size);
+                .getDimensionPixelSize(R.dimen.fab_size);
         Outline fabOutLine = new Outline();
         fabOutLine.setOval(0, 0, fabSize, fabSize);
     }
@@ -63,7 +56,7 @@ public class GUIUtils {
     }
 
 
-    public static void hideRevealEffect (final View v, int centerX, int centerY, int initialRadius) {
+    public static void hideRevealEffect(final View v, int centerX, int centerY, int initialRadius) {
 
         v.setVisibility(View.VISIBLE);
 
@@ -100,13 +93,13 @@ public class GUIUtils {
         anim.start();
     }
 
-    private static void revealShow(View rootView, boolean reveal, final Dialog dialog){
+    private static void revealShow(View rootView, boolean reveal, final Dialog dialog) {
         final View view = rootView.findViewById(R.id.circularReveal);
         int w = view.getWidth();
         int h = view.getHeight();
         float maxRadius = (float) Math.sqrt(w * w / 4 + h * h / 4);
 
-        if(reveal){
+        if (reveal) {
             Animator revealAnimator = ViewAnimationUtils.createCircularReveal(view,
                     w / 2, h / 2, 0, maxRadius);
 
@@ -133,14 +126,14 @@ public class GUIUtils {
 
     }
 
-    public static void hideViewByScale(View view, @Nullable Animator.AnimatorListener listener)  {
+    public static void hideViewByScale(View view, @Nullable Animator.AnimatorListener listener) {
         ViewPropertyAnimator propertyAnimator = view.animate().setStartDelay(SCALE_FACTOR)
                 .scaleX(0).scaleY(0);
         propertyAnimator.setListener(listener);
         propertyAnimator.start();
     }
 
-    public static void showViewByScale(View view , @Nullable Animator.AnimatorListener listener) {
+    public static void showViewByScale(View view, @Nullable Animator.AnimatorListener listener) {
         ViewPropertyAnimator propertyAnimator = view.animate().setStartDelay(SCALE_FACTOR)
                 .scaleX(1).scaleY(1);
         propertyAnimator.setListener(listener);
@@ -158,7 +151,7 @@ public class GUIUtils {
             @Override
             public void onAnimationEnd(Animator animation) {
                 fabAddMore.setImageDrawable(drawable);
-                showViewByScale(fabAddMore , null);
+                showViewByScale(fabAddMore, null);
             }
 
             @Override
@@ -173,8 +166,8 @@ public class GUIUtils {
         hideViewByScale(fabAddMore, animationListener);
     }
 
-    public static void showDialog(final View root ,AppCompatActivity activity){
-        final AddSumDialog dialogAdd =new AddSumDialog(activity);
+    public static void showDialog(final View root, AppCompatActivity activity) {
+        final AddSumDialog dialogAdd = new AddSumDialog(activity);
         dialogAdd.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {

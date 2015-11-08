@@ -24,7 +24,7 @@ public class App extends Application {
         mGlobalContext = getApplicationContext();
     }
 
-    private  void  initRealm(){
+    private void initRealm() {
         RealmConfiguration config = new RealmConfiguration.Builder(this)
                 .name("myrealm.realm")
                 .deleteRealmIfMigrationNeeded()

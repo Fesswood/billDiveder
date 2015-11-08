@@ -1,7 +1,5 @@
 package com.vk.fesswood.billdivider.data.model;
 
-import android.graphics.Bitmap;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -51,20 +49,20 @@ public class Contact extends RealmObject {
         this.isMegaLSUser = isMegaLSUser;
     }
 
-    public void setPhotoId(long photoId) {
-        this.photoId = photoId;
-    }
-
     public long getPhotoId() {
         return photoId;
     }
 
-    public void setContactId(long contactId) {
-        this.contactId = contactId;
+    public void setPhotoId(long photoId) {
+        this.photoId = photoId;
     }
 
     public long getContactId() {
         return contactId;
+    }
+
+    public void setContactId(long contactId) {
+        this.contactId = contactId;
     }
 
     public int getColor() {
