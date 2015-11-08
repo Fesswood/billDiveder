@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">billDivider</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_realm">Список пуст добавь в меня что-нибудь</string>
+    <string name="add_summ">Добавить Сумму</string>
+    <string name="etTitle">Заголовок</string>
+    <string name="etSum">Сумма</string>
+    <string name="bills">Чеки</string>
+    <string name="people">Участники</string>
+    <string name="stats">Статистика</string>
+    <string name="str_sum_toolbar">Чек:</string>
+    <string name="str_sum">Сумма Чека</string>
+    <string name="row_deleted">Строка удалена</string>
+    <string name="snackbar_action_undo">Отменить</string>
+    <string name="etContact">Имя</string>
+    <string name="etPhone">Телефон</string>
+</resources>

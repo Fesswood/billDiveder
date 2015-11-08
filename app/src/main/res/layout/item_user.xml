@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/llRoot"
+    android:background="@color/md_green_500"
+    android:paddingTop="@dimen/item_margin"
+    android:paddingBottom="@dimen/item_margin"
+    android:paddingLeft="@dimen/item_horizontal_margin"
+    android:paddingRight="@dimen/item_horizontal_margin">
+
+    <ImageView
+        android:layout_marginTop="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_person_white_48dp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/primary_light"
+        android:id="@+id/textView2"/>
+
+    <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
+        android:id="@+id/rrvData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:rrvIsRefreshable="false"
+        app:rrvEmptyLayoutId="@layout/empty_view"/>
+
+</LinearLayout>
