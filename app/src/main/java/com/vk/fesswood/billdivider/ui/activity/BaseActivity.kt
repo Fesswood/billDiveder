@@ -12,12 +12,12 @@ public open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
-        realm : Realm = Realm.getDefaultInstance()
+        realm = Realm.getDefaultInstance()
     }
 
     public fun getRealm(): Realm {
         if (realm == null) {
-            realm : Realm = Realm.getDefaultInstance()
+            realm = Realm.getDefaultInstance()
             return realm!!;
         } else {
             return realm!!;

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +16,7 @@ import com.vk.fesswood.billdivider.R
 import com.vk.fesswood.billdivider.data.adapter.SumPartsAdapter
 import com.vk.fesswood.billdivider.data.model.Contact
 import com.vk.fesswood.billdivider.data.model.SumPart
+import com.vk.fesswood.billdivider.ui.activity.ContactActivity
 import com.vk.fesswood.billdivider.ui.activity.MainActivity
 import com.vk.fesswood.billdivider.utils.ContactAccessor
 import io.realm.Realm
@@ -30,6 +30,7 @@ public class UserFragment : BaseRecyclerViewFragment(), MainActivity.OnContactAd
     private var mAdapter: SumPartsAdapter? = null
     private val TAG: String = BillFragment::class.simpleName as String
     public final val PICK_CONTACT: Int = 2015;
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -55,8 +56,8 @@ public class UserFragment : BaseRecyclerViewFragment(), MainActivity.OnContactAd
     }
 
     override fun addContact() {
-        var i = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(i, PICK_CONTACT);
+        var i1 = Intent(context, ContactActivity::class.java);
+        startActivityForResult(i1, PICK_CONTACT);
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
