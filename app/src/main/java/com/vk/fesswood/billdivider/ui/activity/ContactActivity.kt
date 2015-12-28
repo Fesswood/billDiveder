@@ -1,7 +1,9 @@
 package com.vk.fesswood.billdivider.ui.activity
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -13,12 +15,13 @@ import com.vk.fesswood.billdivider.data.adapter.SumPartsAdapter
 import com.vk.fesswood.billdivider.data.model.Contact
 import com.vk.fesswood.billdivider.data.model.SumPart
 import com.vk.fesswood.billdivider.utils.ContactAccessor
+import com.vk.fesswood.billdivider.utils.GUIUtils
 import io.realm.Realm
-import kotlinx.android.synthetic.activity_contactv2.civContactImage
-import kotlinx.android.synthetic.activity_contactv2.rwBills
+import kotlinx.android.synthetic.activity_contactv2.*
 
 public class ContactActivity : BaseActivity(), View.OnClickListener {
 
+    private val PERMISSIONS_REQUEST_READ_CONTACTS: Int =0
     public final val PICK_CONTACT: Int = 2015;
     private val TAG: String = ContactActivity::class.simpleName as String
     private val CONTACT_ID: String = "contact_id"
@@ -50,7 +53,37 @@ public class ContactActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+
     fun addContact() {
+        // Here, thisActivity is the current activity
+        if (checkSelfPermission(
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.READ_CONTACTS)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                startContactPicker()
+
+            } else {
+                var perms :Array<String> = arrayOf(Manifest.permission.READ_CONTACTS)
+                // No explanation needed, we can request the permission.
+                requestPermissions(
+                        perms,
+                        PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+
+    private fun startContactPicker() {
         var i = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(i, PICK_CONTACT);
     }
@@ -76,13 +109,39 @@ public class ContactActivity : BaseActivity(), View.OnClickListener {
             var contactUri: Uri = data?.data as Uri
             var accessor = ContactAccessor()
             var contact = accessor.loadContact(contentResolver, contactUri)
-            //var bimap = accessor.loadContactPhoto(activity.contentResolver,contact.contactId,contact.photoId)
+            var bitmap = accessor.loadContactPhoto(contentResolver,contact.contactId,contact.photoId)
             Realm.getDefaultInstance().executeTransaction {
                 it.copyToRealmOrUpdate(contact)
             }
             Log.d(TAG, "user ${contactToString(contact)} ")
+            etName.setText(contact.name)
+            etPhone.setText(contact.phone)
+            if(!contact.photoId.equals(0)){
+                civContactImage.setImageBitmap(bitmap)
+            }
+            bitmap.recycle();
         }
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
+        when(requestCode){
+            PERMISSIONS_REQUEST_READ_CONTACTS -> {
+                if (grantResults!!.size > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        startContactPicker()
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    GUIUtils.showSnackbar(fabOK,R.string.cant_do_with_out_perms)
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+        }
+    }
+
 
     fun contactToString(contact: Contact): String {
         return " ${contact.contactId} ${contact.capName} ${contact.name} ${contact.phone} ${contact.photoId}"

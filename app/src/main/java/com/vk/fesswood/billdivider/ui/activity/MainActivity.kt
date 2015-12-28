@@ -11,8 +11,8 @@ import android.view.View
 import com.vk.fesswood.billdivider.R
 import com.vk.fesswood.billdivider.data.model.SumPart
 import com.vk.fesswood.billdivider.ui.fragment.BaseRecyclerViewFragment
-import com.vk.fesswood.billdivider.ui.fragment.BillFragment
-import com.vk.fesswood.billdivider.ui.fragment.UserFragment
+import com.vk.fesswood.billdivider.ui.fragment.BillListFragment
+import com.vk.fesswood.billdivider.ui.fragment.UserListFragment
 import com.vk.fesswood.billdivider.utils.GUIUtils
 import io.realm.Realm
 import kotlinx.android.synthetic.activity_main.*
@@ -43,9 +43,9 @@ public class MainActivity : BaseActivity()
 
     private fun setupViewPager(viewPager: ViewPager) {
 
-        adapter.addFragment(BillFragment(), resources.getString(R.string.bills))
-        adapter.addFragment(UserFragment(), resources.getString(R.string.people))
-        adapter.addFragment(BillFragment(), resources.getString(R.string.stats))
+        adapter.addFragment(BillListFragment(), resources.getString(R.string.bills))
+        adapter.addFragment(UserListFragment(), resources.getString(R.string.people))
+        adapter.addFragment(BillListFragment(), resources.getString(R.string.stats))
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(this)
     }
@@ -114,7 +114,7 @@ public class MainActivity : BaseActivity()
 
     private fun showSnackbarForDeletedRow(part: SumPart) {
         Snackbar.make(viewpager, R.string.row_deleted, Snackbar.LENGTH_LONG)
-                .setAction(R.string.snackbar_action_undo, View.OnClickListener {
+                .setAction(R.string.snackbar_action_undo, {
                     var realm = Realm.getDefaultInstance();
                     realm.executeTransaction {
                         realm.copyToRealmOrUpdate(part)

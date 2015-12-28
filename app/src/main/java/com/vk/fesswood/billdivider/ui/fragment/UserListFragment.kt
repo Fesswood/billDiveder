@@ -24,11 +24,11 @@ import io.realm.Realm
 /**
  * A simple [Fragment] subclass.
  */
-public class UserFragment : BaseRecyclerViewFragment(), MainActivity.OnContactAddListener {
+public class UserListFragment : BaseRecyclerViewFragment(), MainActivity.OnContactAddListener {
 
 
     private var mAdapter: SumPartsAdapter? = null
-    private val TAG: String = BillFragment::class.simpleName as String
+    private val TAG: String = BillListFragment::class.simpleName as String
     public final val PICK_CONTACT: Int = 2015;
 
 

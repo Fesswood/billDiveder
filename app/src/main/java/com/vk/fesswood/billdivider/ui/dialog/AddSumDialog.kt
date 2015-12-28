@@ -23,9 +23,9 @@ public class AddSumDialog(context: Context) : BaseDialog(context, R.style.full_s
     private var etSum: EditText? = null
 
     private fun initView() {
-        fabOk: FloatingActionButton = findViewById(R.id.fabOK) as FloatingActionButton
-        etTitle: EditText = findViewById(R.id.etTitle) as EditText
-        etSum: EditText = findViewById(R.id.etSum) as EditText
+        fabOk = findViewById(R.id.fabOK) as FloatingActionButton
+        etTitle = findViewById(R.id.etTitle) as EditText
+        etSum = findViewById(R.id.etSum) as EditText
         fabOk?.setOnClickListener {
             var realm = getRealm();
             getRealm()?.executeTransaction {
@@ -47,7 +47,7 @@ public class AddSumDialog(context: Context) : BaseDialog(context, R.style.full_s
     override public fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState);
-        colors : IntArray = context.resources.getIntArray(R.array.sumcolors)
+        colors = context.resources.getIntArray(R.array.sumcolors)
         val colorDrawable = ColorDrawable()
         setContentView(R.layout.fragment_dialog_add_sum)
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)

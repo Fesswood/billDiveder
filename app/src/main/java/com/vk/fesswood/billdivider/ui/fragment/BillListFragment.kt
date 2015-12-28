@@ -16,11 +16,11 @@ import com.vk.fesswood.billdivider.data.model.SumPart
 /**
  * A simple [Fragment] subclass.
  */
-public class BillFragment : BaseRecyclerViewFragment() {
+public class BillListFragment : BaseRecyclerViewFragment() {
 
     private var mAdapter: SumPartsAdapter? = null
 
-    private val TAG: String = BillFragment::class.simpleName as String
+    private val TAG: String = BillListFragment::class.simpleName as String
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

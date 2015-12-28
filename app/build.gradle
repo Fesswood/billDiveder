@@ -36,7 +36,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.0.1'
 }
 buildscript {
-    ext.kotlin_version = '0.14.449'
+    ext.kotlin_version = '1.0.0-beta-3594'
     repositories {
         mavenCentral()
     }

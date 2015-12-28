@@ -46,7 +46,7 @@ public open class BaseRecyclerViewFragment : android.support.v4.app.Fragment() {
     }
 
     fun getColor(i: Int): Int {
-        val count = mColors!!.count()
+        val count = mColors!!.size
         var position = i
         if (i > count) {
             position -= count
