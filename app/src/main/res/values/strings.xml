@@ -21,4 +21,6 @@
     <string name="etContact">Имя</string>
     <string name="etPhone">Телефон</string>
     <string name="cant_do_with_out_perms">Доступ запрещен</string>
+    <string name="choose_contact_first">Сначало выберите контакт</string>
+
 </resources>

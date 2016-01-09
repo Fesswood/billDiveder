@@ -1,5 +1,8 @@
 package com.vk.fesswood.billdivider.data.model;
 
+import java.util.ArrayList;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,7 +15,7 @@ public class Contact extends RealmObject {
     private String phone;
     private String name;
     private String capName;
-    private boolean isMegaLSUser;
+    private RealmList<SumPart> sumParts;
     private long photoId;
     private long contactId;
     private int color;
@@ -41,14 +44,6 @@ public class Contact extends RealmObject {
         this.phone = phone;
     }
 
-    public boolean isMegaLSUser() {
-        return isMegaLSUser;
-    }
-
-    public void setIsMegaLSUser(boolean isMegaLSUser) {
-        this.isMegaLSUser = isMegaLSUser;
-    }
-
     public long getPhotoId() {
         return photoId;
     }
@@ -71,5 +66,13 @@ public class Contact extends RealmObject {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public RealmList<SumPart> getSumParts() {
+        return sumParts;
+    }
+
+    public void setSumParts(RealmList<SumPart> sumParts) {
+        this.sumParts = sumParts;
     }
 }

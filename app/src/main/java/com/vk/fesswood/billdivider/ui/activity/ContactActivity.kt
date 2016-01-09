@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.vk.fesswood.billdivider.R
+import com.vk.fesswood.billdivider.data.adapter.BillsAdapter
 import com.vk.fesswood.billdivider.data.adapter.SumPartsAdapter
 import com.vk.fesswood.billdivider.data.model.Contact
 import com.vk.fesswood.billdivider.data.model.SumPart
@@ -21,12 +22,14 @@ import kotlinx.android.synthetic.activity_contactv2.*
 
 public class ContactActivity : BaseActivity(), View.OnClickListener {
 
-    private val PERMISSIONS_REQUEST_READ_CONTACTS: Int =0
+    private val PERMISSIONS_REQUEST_READ_CONTACTS: Int = 0
     public final val PICK_CONTACT: Int = 2015;
     private val TAG: String = ContactActivity::class.simpleName as String
     private val CONTACT_ID: String = "contact_id"
     private var mResultContactId: Int? = 0;
-    private var mAdapter: SumPartsAdapter? = null
+    private var mAdapter: BillsAdapter? = null
+    private var mIsContactExist:Boolean? = false
+    private var mContact: Contact? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +37,15 @@ public class ContactActivity : BaseActivity(), View.OnClickListener {
         civContactImage.setOnClickListener(this)
         var result = getRealm().where(SumPart::class.java).findAll()
         var layoutManager = LinearLayoutManager(this)
-        mAdapter = SumPartsAdapter(this, result, true, true)
+        mAdapter = BillsAdapter(this, result, true, true)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rwBills.layoutManager = layoutManager
         rwBills.adapter = mAdapter;
+        getRealm().addChangeListener {
+            var sum : Double = 0.0
+            mContact?.sumParts?.forEach { sum+=it.value }
+            tvSum.text = sum.toString()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -59,27 +67,17 @@ public class ContactActivity : BaseActivity(), View.OnClickListener {
         if (checkSelfPermission(
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
             if (shouldShowRequestPermissionRationale(
                     Manifest.permission.READ_CONTACTS)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 startContactPicker()
-
             } else {
-                var perms :Array<String> = arrayOf(Manifest.permission.READ_CONTACTS)
-                // No explanation needed, we can request the permission.
+                var perms: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS)
                 requestPermissions(
                         perms,
                         PERMISSIONS_REQUEST_READ_CONTACTS);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
+        }else{
+            startContactPicker()
         }
     }
 
@@ -104,19 +102,26 @@ public class ContactActivity : BaseActivity(), View.OnClickListener {
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PICK_CONTACT && resultCode == Activity.RESULT_OK) {
             var contactUri: Uri = data?.data as Uri
             var accessor = ContactAccessor()
             var contact = accessor.loadContact(contentResolver, contactUri)
-            var bitmap = accessor.loadContactPhoto(contentResolver,contact.contactId,contact.photoId)
+            var bitmap = accessor.loadContactPhoto(contentResolver, contact.contactId, contact.photoId)
             Realm.getDefaultInstance().executeTransaction {
                 it.copyToRealmOrUpdate(contact)
             }
             Log.d(TAG, "user ${contactToString(contact)} ")
             etName.setText(contact.name)
             etPhone.setText(contact.phone)
-            if(!contact.photoId.equals(0)){
+            Log.d(TAG,"start save the contact to db")
+            getRealm().executeTransaction {
+                mContact = it.copyToRealmOrUpdate(contact)
+                mAdapter?.setContact(mContact)
+            }
+            Log.d(TAG,"finish save the contact to db")
+            if (!contact.photoId.equals(0)) {
                 civContactImage.setImageBitmap(bitmap)
             }
             bitmap.recycle();
@@ -124,16 +129,16 @@ public class ContactActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
-        when(requestCode){
+        when (requestCode) {
             PERMISSIONS_REQUEST_READ_CONTACTS -> {
                 if (grantResults!!.size > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        startContactPicker()
+                    startContactPicker()
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
                 } else {
-                    GUIUtils.showSnackbar(fabOK,R.string.cant_do_with_out_perms)
+                    GUIUtils.showSnackbar(fabFinish, R.string.cant_do_with_out_perms)
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }

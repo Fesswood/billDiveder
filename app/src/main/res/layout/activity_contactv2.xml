@@ -18,15 +18,17 @@
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/civContactImage"
+            android:background="@drawable/bg_choose_contact"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:background="@color/primary"
             app:civ_border_color="#8BC34A"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="2dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="false" />
 
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="96dp"
+            android:layout_height="116dp"
             android:layout_weight="1">
 
             <android.support.design.widget.TextInputLayout
@@ -81,7 +83,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="28sp"
+
+            android:layout_gravity="right"
             android:text="@string/etSum" />
+
+
+        <TextView
+            android:id="@+id/tvSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="right"
+            android:layout_gravity="right|center"
+            android:text="@string/etSum" />
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -113,7 +129,7 @@
                 app:fabSize="mini" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabOK"
+                android:id="@+id/fabFinish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
